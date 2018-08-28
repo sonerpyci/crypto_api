@@ -1,0 +1,28 @@
+{
+    "development": {
+        "username": "root",
+        "password": null,
+        "database": "master_nodeum",
+        "host": "127.0.0.1",
+        "dialect": "mysql",
+        "define": {
+            "charset": "utf8",
+            "collate": "utf8_general_ci",
+            "timestamps": true
+        }
+    },
+    "test": {
+        "username": "root",
+        "password": null,
+        "database": "master_nodeum_test",
+        "host": "127.0.0.1",
+        "dialect": "postgres"
+    },
+    "production": {
+        "username": "root",
+        "password": null,
+        "database": "master_nodeum_test",
+        "host": "127.0.0.1",
+        "dialect": "postgres"
+    }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "masterNodeum_API",
+  "version": "1.0.0",
+  "description": "masterNodeum crypto Currencies Api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-server": "nodemon index.js",
+    "start": "node index.js",
+    "init-db": "node scripts/initDB.js",
+    "seed-db": "node scripts/seedDB.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mysql2": "^1.5.3",
+    "pg": "^7.4.3",
+    "sequelize": "^4.38.0"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0",
+    "lodash": "^4.17.10",
+    "nodemon": "^1.17.5"
+  }
+}
