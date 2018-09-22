@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 
 app.use("/subscribers", require("./routes/subscriber.js"));
 app.use("/countries", require("./routes/country.js"));
+app.use("/registration", require("./routes/registration.js"));
 
 app.get('/', function (req, res) {
     res.send('Hello World');
