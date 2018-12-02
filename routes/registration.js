@@ -7,6 +7,7 @@ const registrationsController = require('../controllers/registration.js');
 
 router.get('/', registrationsController.getAllRegistrations);
 router.get('/:id', registrationsController.getRegistrationById);
+router.get('/byName/:id', registrationsController.getRegistrationByName);
 router.post('/', registrationsController.createRegistration);
 
 //router.post('/', checkAuth, upload.single('productImage'), productsController.product_create );

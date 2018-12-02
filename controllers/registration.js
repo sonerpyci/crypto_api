@@ -1,8 +1,17 @@
 const models = require('../models');
 const Registration = models.Registration;
+const Registered_coin = models.Registered_coin;
 
 exports.getAllRegistrations = function (req, res, next) {
-    Registration.findAll().then((registrations) => {
+    Registration.findAll({
+        include: {
+            model: models.Registered_coin,
+            order: [
+                [models.Registered_coin, 'id', 'asc']
+            ]/*,
+            limit: 1*/
+        }
+    }).then((registrations) => {
         res.json(registrations);
     }).catch((err) => {
         console.log(err);
@@ -11,6 +20,25 @@ exports.getAllRegistrations = function (req, res, next) {
 }
 exports.getRegistrationById = function (req, res, next) {
     Registration.findById(req.params.id, {
+    }).then((registration) => {
+        res.json(registration);
+    }).catch((err) => {
+        console.log(err);
+        res.send("ERROR");
+    });
+}
+
+exports.getRegistrationByName = function (req, res, next) {
+    Registration.find({
+        where: {
+            coinName: req.params.id,
+        },
+        include: {
+            model: models.Registered_coin,
+            order: [
+                [models.Registered_coin, 'id', 'asc']
+            ]
+        }
     }).then((registration) => {
         res.json(registration);
     }).catch((err) => {
@@ -44,10 +72,20 @@ exports.createRegistration = function (req, res, next) {
         blockExplorer: req.body.blockExplorer,
         coinLogo: req.body.coinLogo
     }).then((result) => {
-        result = JSON.parse(JSON.stringify({"success":true, "result":result}));
-        res.json(result);
+        Registered_coin.create({
+            registration_id: result.id,
+            coinName: req.body.coinName,
+            coinTicker: req.body.coinTicker
+        }).then((result) => {
+            result = JSON.parse(JSON.stringify({"success":true, "result":result}));
+            res.json(result);
+        }).catch((err) => {
+            console.log(err);
+            res.send("ERROR 1");
+        });
     }).catch((err) => {
         console.log(err);
-        res.send("ERROR");
+        res.send("ERROR 2");
     });
+
 }

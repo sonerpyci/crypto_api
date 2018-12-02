@@ -91,8 +91,16 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {
         timestamps: false,
-        underscored: true
+        underscored: true,
+        indexes: [
+            {
+                unique: true,
+                fields: ['id']
+            }
+        ]
     });
-
+    Registration.associate = function (models) {
+        models.Registration.hasMany(models.Registered_coin);
+    };
     return Registration;
 };
