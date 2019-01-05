@@ -1,5 +1,6 @@
 const models = require('../models');
 const Registered_coin = models.Registered_coin;
+const Registration = models.Registration;
 //var Sequelize = require('sequelize');
 //const Op = Sequelize.Op
 
@@ -42,7 +43,6 @@ exports.createRegisteredCoin = function (req, res, next) {
         registration_id: req.body.registration_id,
         coinTicker: req.body.coinTicker,
         coinName: req.body.coinName,
-        isCrawled: req.body.isCrawled,
         currentPrice: req.body.currentPrice,
         worth: req.body.worth,
         dailyIncome: req.body.dailyIncome,
@@ -55,8 +55,20 @@ exports.createRegisteredCoin = function (req, res, next) {
         status: req.body.status,
         lastCheckTime: req.body.lastCheckTime
     }).then((result) => {
+        Registration.update(
+            {isCrawled: req.body.isCrawled},
+            {where: {id: Number(req.body.registration_id) }}
+        ).then(function(rowsUpdated) {
+            console.log(rowsUpdated)
+            result = JSON.parse(JSON.stringify({"success": true, "result": rowsUpdated}));
+            res.json(result);
+        }).catch((err) => {
+            console.log(err);
+            res.send("ERROR in CREATE MODULE");
+        });
         result = JSON.parse(JSON.stringify({"success": true, "result": result}));
         res.json(result);
+
     }).catch((err) => {
         console.log(err);
         res.send("ERROR in CREATE MODULE");

@@ -6,6 +6,7 @@ const registrationsController = require('../controllers/registration.js');
 
 
 router.get('/', registrationsController.getAllRegistrations);
+router.get('/IncludePassive', registrationsController.getAllRegistrationsIncludedPassives);
 router.get('/:id', registrationsController.getRegistrationById);
 router.get('/byName/:id', registrationsController.getRegistrationByName);
 router.post('/', registrationsController.createRegistration);

@@ -13,11 +13,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        isCrawled: {
-            type: DataTypes.BOOLEAN,
-            allowNull: true,
-            defaultValue: 0
-        },
         currentPrice: {
             type: DataTypes.FLOAT,
             allowNull: true

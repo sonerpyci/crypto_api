@@ -10,6 +10,9 @@ exports.getAllRegistrations = function (req, res, next) {
                 [models.Registered_coin, 'id', 'asc']
             ]/*,
             limit: 1*/
+        },
+        where: {
+            isCrawled: 1
         }
     }).then((registrations) => {
         res.json(registrations);
@@ -18,6 +21,25 @@ exports.getAllRegistrations = function (req, res, next) {
         res.send("ERROR");
     });
 }
+
+exports.getAllRegistrationsIncludedPassives = function (req, res, next) {
+    Registration.findAll({
+        include: {
+            model: models.Registered_coin,
+            order: [
+                [models.Registered_coin, 'id', 'asc']
+            ]/*,
+            limit: 1*/
+        }
+    }).then((registrations) => {
+        res.json(registrations);
+    }).catch((err) => {
+        console.log(err);
+        res.send("ERROR");
+    });
+}
+
+
 exports.getRegistrationById = function (req, res, next) {
     Registration.findById(req.params.id, {
     }).then((registration) => {
@@ -59,6 +81,7 @@ exports.createRegistration = function (req, res, next) {
         collateralAmount: req.body.collateralAmount,
         watchDog: req.body.watchDog,
         sentinelRequired: req.body.sentinelRequired,
+        isCrawled: 0,//default
         btcTalkAnn: req.body.btcTalkAnn,
         betweenBlocksAnn: req.body.betweenBlocksAnn,
         github: req.body.github,

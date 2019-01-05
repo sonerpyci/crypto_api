@@ -41,6 +41,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        isCrawled: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            defaultValue: 0
+        },
         btcTalkAnn: {
             type: DataTypes.STRING,
             allowNull: false
